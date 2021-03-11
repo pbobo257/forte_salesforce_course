@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Job_Position_is_US_Location</fullName>
+    <active>true</active>
+    <description>For Job Position is US Location, HR Manager Mailing Address should be US or United States or USA</description>
+    <errorConditionFormula>AND(
+ISPICKVAL(Location__c, &apos;USA&apos;),
+NOT(OR(
+HR_Manager__r.MailingCountry = &apos;US&apos;,
+HR_Manager__r.MailingCountry = &apos;USA&apos;,
+HR_Manager__r.MailingCountry = &apos;United States&apos;
+))
+)</errorConditionFormula>
+    <errorDisplayField>HR_Manager__c</errorDisplayField>
+    <errorMessage>HR Manager Mailing Address should be US or United States or USA</errorMessage>
+</ValidationRule>
