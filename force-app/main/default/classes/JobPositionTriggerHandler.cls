@@ -3,13 +3,13 @@
  */
 
 public class JobPositionTriggerHandler {
-    public static void onBeforeInsert(List<Job_Position__c> insertdNewList) {
+    public static void onBeforeInsert(List<Job_Position__c> insertedNewList) {
 
-        JobPositionHelper.formatSalesforcePositionTitle(insertdNewList);
+        JobPositionHelper.formatSalesforcePositionTitle(insertedNewList);
     }
     public static void onAfterUpdate(Map<Id, Job_Position__c> newMap, Map<Id,Job_Position__c> oldMap) {
 
-        JobPositionHelper.reviewHighValueJobPosition(newMap);
+        JobPositionHelper.reviewHighValueJobPosition(newMap,oldMap);
     }
 
 }

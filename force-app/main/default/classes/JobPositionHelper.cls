@@ -13,13 +13,17 @@ public class JobPositionHelper {
         }
     }
 
-    //When position budged is changed and it is more than 5000, create a task for HR to review Job Position with Task Subject “Review high budget application ” + <Application Name>. Assign Task to HR Manager User. Send an email to HR Manager with the text “Please review this high budget application ” + application name. 
-    public static void reviewHighValueJobPosition(Map<id,Job_Position__c> updatedPositions){
+    //When position budged is changed and it is more than 5000, create a task for HR to review Job Position with Task Subject “Review high budget application ” + <Application Name>. 
+    //Assign Task to HR Manager User. Send an email to HR Manager with the text “Please review this high budget application ” + application name. 
+    public static void reviewHighValueJobPosition(Map<Id,Job_Position__c> updatedPositions, Map<Id,Job_Position__c> oldPositions){
         List<Task> reviewTasks = new List<Task>();
         integer valueToNotify = 5000;
         List<Messaging.SingleEmailMessage> messages = new List<Messaging.SingleEmailMessage>();
 
-        for(Job_Position__c jobPosition :[select Id,Name,Owner.Email from Job_Position__c where Id in :updatedPositions.values() and Position_Budget__c >:valueToNotify]){
+        for(Job_Position__c jobPosition :[select Id,Name,Position_Budget__c,Owner.Email from Job_Position__c where Id in :updatedPositions.values() and Position_Budget__c >:valueToNotify]){
+            if(oldPositions.get(jobPosition.Id).Position_Budget__c == jobPosition.Position_Budget__c){
+                continue;
+            }
             reviewTasks.add(new Task(Subject=REVIEW_TASK_SUBJECT+jobPosition.Name, WhatId=jobPosition.Id, OwnerId=jobPosition.Ownerid));
             System.debug(jobPosition.Name);
             Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();

@@ -28,7 +28,7 @@ trigger JobPositionTrigger on Job_Position__c (after insert,after update,after d
         if(Trigger.isDelete){
             //JobPositionTriggerHandler.onAfterDelete();                
         }
-        if(Trigger.isUnDelete){
+        if(Trigger.isUndelete){
             //JobPositionTriggerHandler.onAfterUnDelete();                
         }
     }
