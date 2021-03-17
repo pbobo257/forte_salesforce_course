@@ -1,11 +1,6 @@
 public class JobApplicationHelper {
-    public static final string CANDIDATE_VISA_LESS_THAN_YEAR_ERROR_MESSAGE='You can not apply for this job due to your US visa expiration date. ';
-    public static final string JOB_POSITION_LOCATION_USA = 'USA';
-
 
     public static void validateUSACandidateWorkForYear(List<Job_Application__c> createdJobApplications) {
-        System.debug('trigger');
-
         List<Id> candidatesIds = new List<Id>();
         List<Id> positionsIds = new List<Id>();
         for(Job_Application__c application: createdJobApplications){
@@ -17,10 +12,9 @@ public class JobApplicationHelper {
 
         for(Job_Application__c application: createdJobApplications){
             Job_Candidate__c candidate = candidates.get(application.Job_Candidate__c);
-            if(positions.get(application.Job_Position__c).Location__c==JOB_POSITION_LOCATION_USA && candidate.USA_visa_holder__c &&
+            if(positions.get(application.Job_Position__c).Location__c==Constants.JOB_POSITION_LOCATION_USA && candidate.USA_visa_holder__c &&
             (System.Today().daysBetween(candidate.USA_visa_valid_to__c)<=365 || candidate.USA_visa_valid_From__c > System.Today())){
-                System.debug('if');
-                application.addError(CANDIDATE_VISA_LESS_THAN_YEAR_ERROR_MESSAGE);
+                application.addError(Constants.CANDIDATE_VISA_LESS_THAN_YEAR_ERROR_MESSAGE);
             }
         }
     }

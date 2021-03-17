@@ -10,6 +10,6 @@ public class JobCandidateTriggerHandler {
 
     public static void onAfterUndelete(Map<Id, Job_Candidate__c> undeletedCandidates) {
         
-        JobCandidateHelper.markRecoveredRecords(undeletedCandidates);
+        JobCandidateHelper.markRecoveredCandidates(undeletedCandidates);
     }
 }
