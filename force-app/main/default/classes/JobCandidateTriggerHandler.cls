@@ -3,7 +3,7 @@ public class JobCandidateTriggerHandler {
         
         JobCandidateHelper.validateVisaTerms(insertedNewList);
     }
-    public static void onBeforeUpdate(Map<Id, Job_Candidate__c> newMap, Map<Id,Job_Candidate__c> oldMap) {
+    public static void onBeforeUpdate(Map<Id, Job_Candidate__c> newMap, Map<Id, Job_Candidate__c> oldMap) {
 
         JobCandidateHelper.validateVisaTerms(newMap.values());
     }

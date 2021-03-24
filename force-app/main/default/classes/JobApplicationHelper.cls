@@ -7,8 +7,9 @@ public class JobApplicationHelper {
             candidatesIds.add(application.Job_Candidate__c);
             positionsIds.add(application.Job_Position__c);
         }
-        Map<Id, Job_Candidate__c> candidates = new Map<Id,Job_Candidate__c>([select Id, USA_visa_holder__c, USA_visa_valid_to__c, USA_visa_valid_From__c from Job_Candidate__c where Id in :candidatesIds]);
-        Map<Id, Job_Position__c> positions = new Map<Id,Job_Position__c>([select Id,Location__c from Job_Position__c where Id in :positionsIds]);
+        
+        Map<Id, Job_Candidate__c> candidates = new Map<Id,Job_Candidate__c>([SELECT Id, USA_visa_holder__c, USA_visa_valid_to__c, USA_visa_valid_From__c FROM Job_Candidate__c WHERE Id IN :candidatesIds]);
+        Map<Id, Job_Position__c> positions = new Map<Id,Job_Position__c>([SELECT Id,Location__c FROM Job_Position__c WHERE Id IN :positionsIds]);
 
         for(Job_Application__c application: createdJobApplications){
             Job_Candidate__c candidate = candidates.get(application.Job_Candidate__c);

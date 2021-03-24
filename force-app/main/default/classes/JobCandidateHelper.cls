@@ -10,8 +10,11 @@ public class JobCandidateHelper {
 
     public static void markRecoveredCandidates(Map<Id, Job_Candidate__c> recoveredCandidates){
         List<Job_Candidate__c> candidatesToUpdate = new List<Job_Candidate__c>();
-        for(Job_Candidate__c candidate : [select Id, Recovered__c from Job_Candidate__c where Id in :recoveredCandidates.keyset()]){
-            candidate.Recovered__c=true;
+        
+        List<Job_Candidate__c> candidates = [SELECT Id, Recovered__c FROM Job_Candidate__c WHERE Id IN :recoveredCandidates.keyset()];
+
+        for(Job_Candidate__c candidate : candidates){
+            candidate.Recovered__c = true;
             candidatesToUpdate.add(candidate);
         }
         update candidatesToUpdate;

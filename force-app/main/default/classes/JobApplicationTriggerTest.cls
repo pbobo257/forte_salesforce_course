@@ -2,22 +2,22 @@
 public class JobApplicationTriggerTest {
     @TestSetup
     static void makeData(){
-        Contact hr = new Contact(LastName='hr contact',MailingCountry='USA');
+        Contact hr = new Contact(LastName='hr contact', MailingCountry='USA');
         insert hr;
-        Date positionDate = Date.newInstance(2021, 03, 25);
-        Job_Position__c[] application = DataFactory.generateJobPositions(1,hr,positionDate,Constants.PRACTICE_UNIT_SALESFORCE,Constants.JOB_POSITION_LOCATION_USA);
-        Job_Candidate__c[] candidate = DataFactory.generateJobCandidates(1,true,positionDate,positionDate.addYears(1));
+        Date positionDate = Date.today();
+        Job_Position__c[] application = DataFactory.generateJobPositions(1, hr, positionDate, Constants.PRACTICE_UNIT_SALESFORCE, Constants.JOB_POSITION_LOCATION_USA);
+        Job_Candidate__c[] candidate = DataFactory.generateJobCandidates(1, true, positionDate, positionDate.addYears(1));
         insert application;
         insert candidate;
     }
 
     @IsTest
     static void validateUSACandidateWorkForYearTest(){
-        Job_Position__c position = [SELECT Id FROM Job_Position__c where Location__c=:Constants.JOB_POSITION_LOCATION_USA limit 1];
-        Job_Candidate__c candidate = [SELECT Id FROM Job_Candidate__c where USA_visa_holder__c=true limit 1];
-        List<Job_Application__c> applications = DataFactory.generateJobApplications(200,position,candidate);
+        Job_Position__c position = [SELECT Id FROM Job_Position__c WHERE Location__c=:Constants.JOB_POSITION_LOCATION_USA LIMIT 1];
+        Job_Candidate__c candidate = [SELECT Id FROM Job_Candidate__c WHERE USA_visa_holder__c=true LIMIT 1];
+        List<Job_Application__c> applications = DataFactory.generateJobApplications(200, position, candidate);
         Test.startTest();
-        Database.SaveResult[] results = Database.insert(applications,false);
+        Database.SaveResult[] results = Database.insert(applications, false);
         Test.stopTest();
 
         for(Database.SaveResult result : results){
