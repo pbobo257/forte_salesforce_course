@@ -12,6 +12,7 @@
     <navType>Standard</navType>
     <tabs>Job_Position__c</tabs>
     <tabs>Job_Candidate__c</tabs>
+    <tabs>Candidate_Applications</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Job_Application_UtilityBar</utilityBar>
 </CustomApplication>

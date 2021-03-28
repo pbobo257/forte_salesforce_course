@@ -1,0 +1,37 @@
+<template>
+    <lightning-card>
+        <template if:true={isCreating}>
+            <c-job-application-creator oncreated={handleCreation} positionid={positionid}></c-job-application-creator>
+        </template>
+        <template if:true={isEditing}>
+            <c-job-application-editor onedited={handleEdit} applicationid={objectToEdit}></c-job-application-editor>
+        </template>
+        <template if:false={isCreating}>
+            <template if:false={isEditing}>
+
+                <lightning-layout horizontal-align="center" vertical-align="Start">
+                    <lightning-layout-item padding="around-small">
+                        
+                        <template if:true={applications}>
+                            <lightning-button label='create' icon-name="utility:add" onclick={handleCreateClick}></lightning-button>
+                            <lightning-datatable
+                            key-field="Id"
+                            data={applications}
+                            columns={columns}
+                            hide-checkbox-column
+                            onrowaction={handleRowAction}
+                            >
+                        </lightning-datatable>
+                    </template>
+                    <template if:false={applications}>
+                        <h1>Select position</h1>
+                    </template>
+                    <template if:true={error}>
+                        <p>{error}</p>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        </template>
+    </lightning-card>
+</template>

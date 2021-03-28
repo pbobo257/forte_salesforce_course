@@ -1,0 +1,32 @@
+<template>
+    <lightning-card>
+        <lightning-layout  horizontal-align="center" vertical-align="Start">
+            <lightning-layout-item padding="around-small">
+
+                <template if:true={positions.data}>
+                    <lightning-layout>
+                        <lightning-layout-item size="3">
+                            
+                            <lightning-combobox
+                            name="Practice Unit"
+                            label="Practice Unit"
+                            value={practiceUnit}
+                            options={practiceUnits}
+                            onchange={handlePracticeUnitChange} ></lightning-combobox>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    <lightning-datatable
+                    key-field="Id"
+                    data={positions.data}
+                    columns={columns}
+                    onrowselection={handleSelect}
+                    >
+                </lightning-datatable>
+            </template>
+            <template if:true={errors}>
+                <p>{errors}</p>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+    </lightning-card>
+</template>

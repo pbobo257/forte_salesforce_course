@@ -1,0 +1,10 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item flexibility="auto" padding="around-small" size="8">
+            <c-job-position-list onselectid={handleSelectId}></c-job-position-list>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto" padding="around-small" size="4">
+            <c-job-application-list positionid={positionId}></c-job-application-list>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

@@ -5,9 +5,9 @@ public class JobApplicationTriggerTest {
         Contact hr = new Contact(LastName='hr contact', MailingCountry='USA');
         insert hr;
         Date positionDate = Date.today();
-        Job_Position__c[] application = DataFactory.generateJobPositions(1, hr, positionDate, Constants.PRACTICE_UNIT_SALESFORCE, Constants.JOB_POSITION_LOCATION_USA);
+        Job_Position__c[] position = DataFactory.generateJobPositions(1, hr, positionDate, Constants.PRACTICE_UNIT_SALESFORCE, Constants.JOB_POSITION_LOCATION_USA);
         Job_Candidate__c[] candidate = DataFactory.generateJobCandidates(1, true, positionDate, positionDate.addYears(1));
-        insert application;
+        insert position;
         insert candidate;
     }
 
